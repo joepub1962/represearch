@@ -5,13 +5,14 @@ library(ggplot2)
 library(grid)
 library(dplyr)
 library(lattice)
+library(knitr) 
 
-
+knit2html
 
 #par(mfrow=c(2,2))
 
-setwd("/Volumes/KINGSTON/moocs/coursera/datascience/represearch/week1")
-#setwd('f:/moocs/coursera/datascience/represearch/week1')
+#setwd("/Volumes/KINGSTON/moocs/coursera/datascience/represearch/week1")
+setwd('f:/moocs/coursera/datascience/represearch/week1')
 
 #Read in activity file
 f1 <- file.path(getwd(), "activity.csv")
@@ -57,8 +58,8 @@ activeData2<-activeData #Create a new data set
 avgStepsPerInterval <- tapply(activeData2$steps, activeData2$interval, mean, na.rm=TRUE, simplify=TRUE)
 #head(avgStepsPerInterval)
 
-is.na(activeData2$steps) #creates a vector of the logical value of NA's as TRUE
-which(is.na(activeData2$steps)) #creates a vector of the indices of the TRUE values
+#is.na(activeData2$steps) #creates a vector of the logical value of NA's as TRUE
+#which(is.na(activeData2$steps)) #creates a vector of the indices of the TRUE values
 #use the indices to change the NA values to mean of steps per day
 activeData2$steps[which(is.na(activeData2$steps))] <- avgStepsPerInterval
 #head(activeData2)
@@ -77,18 +78,18 @@ median(totalStepsPerDay2)
 activeData3<-activeData2
 
 weekend <- weekdays(as.Date(activeData3$date)) %in% c("Saturday", "Sunday") #logical vector of weekend (TRUE) and weekdays(FALSE)
-weekend
+#weekend
 activeData3['daytype'] <- "weekday" # Create a new column for type of day and fill with default value
 #head(activeData3)
 activeData3$daytype[weekend =='TRUE'] <- "weekend" #Change default value for weekend days
 activeData3$daytype <- as.factor(activeData3$daytype) #convert to factor
-str(activeData3)
+#str(activeData3)
 
 
 #2.Make a panel plot containing a time series plot (i.e. 𝚝𝚢𝚙𝚎 = "𝚕") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
 
 aveSteps3 <- aggregate(steps ~ interval + daytype,  activeData3, mean)
-head(aveSteps3)                     
+#head(aveSteps3)
 
 ## plot time series
 

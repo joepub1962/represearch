@@ -2,8 +2,11 @@
 title: "pa1_template"
 author: "Chris Job"
 date: "April 19, 2016"
-output: html_document
-#output: md_document
+#output: html_document
+output: md_document
+#output:
+#  md_document:
+#    variant: markdown_github
 ---
 
 **Load libraries**
@@ -15,8 +18,10 @@ library(ggplot2)
 library(grid)
 library(dplyr)
 library(lattice)
+library(knitr) 
 
-setwd("/Volumes/KINGSTON/moocs/coursera/datascience/represearch/week1")
+#setwd("/Volumes/KINGSTON/moocs/coursera/datascience/represearch/week1")
+setwd('f:/moocs/coursera/datascience/represearch/week1')
 ```
 
 **Read in activity file**  
@@ -96,7 +101,7 @@ activeData2$steps[which(is.na(activeData2$steps))] <- avgStepsPerInterval
 *4. Histogram, Mean and Median*
 ```{r,echo=TRUE}
 totalStepsPerDay2 <- tapply(activeData2$steps, activeData2$date, sum, na.rm=TRUE)
-head(totalStepsPerDay2)
+#head(totalStepsPerDay2)
 hist(totalStepsPerDay2 , main= "histogram of the total number of steps taken each day", xlab="Total steps taken per day", ylab="Count", las=1,breaks=30, col="green", xlim=c(0,25000), ylim=c(0,20))
 
 mean(totalStepsPerDay2)

@@ -6,12 +6,18 @@
 
     library("lubridate")
 
+    ## Warning: package 'lubridate' was built under R version 3.1.3
+
     ## 
     ## Attaching package: 'lubridate'
-    ## 
+
     ## The following objects are masked from 'package:data.table':
     ## 
     ##     hour, mday, month, quarter, wday, week, yday, year
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     date
 
     library(grid)
     library(ggplot2)
@@ -21,30 +27,34 @@
     library(grid)
     library(dplyr)
 
-    ## Warning: package 'dplyr' was built under R version 3.1.2
+    ## Warning: package 'dplyr' was built under R version 3.1.3
 
     ## 
     ## Attaching package: 'dplyr'
-    ## 
+
     ## The following objects are masked from 'package:lubridate':
     ## 
     ##     intersect, setdiff, union
-    ## 
+
     ## The following objects are masked from 'package:data.table':
     ## 
     ##     between, last
+
+    ## The following objects are masked from 'package:stats':
     ## 
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     filter
-    ## 
+    ##     filter, lag
+
     ## The following objects are masked from 'package:base':
     ## 
     ##     intersect, setdiff, setequal, union
 
     library(lattice)
+    library(knitr) 
 
-    setwd("/Volumes/KINGSTON/moocs/coursera/datascience/represearch/week1")
+    ## Warning: package 'knitr' was built under R version 3.1.3
+
+    #setwd("/Volumes/KINGSTON/moocs/coursera/datascience/represearch/week1")
+    setwd('f:/moocs/coursera/datascience/represearch/week1')
 
 **Read in activity file**
 
@@ -61,7 +71,7 @@
 
     hist(totalStepsPerDay, main= "histogram of the total number of steps taken each day", xlab="Total steps taken per day", ylab="Count", las=1,breaks=30, col="green", xlim=c(0,30000), ylim=c(0,10))
 
-![](pa1_template_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](pa1_template_files/figure-markdown_strict/unnamed-chunk-4-1.png)<!-- -->
 
 *3. mean and median of the total number of steps taken per day*
 
@@ -87,7 +97,7 @@ average number of steps taken, averaged across all days (y-axis)*
 
     plot(aveSteps,type='l', xlab("5-minute interval"), ylab("average number of steps taken"),main="time series plot of the average number of steps taken")
 
-![](pa1_template_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](pa1_template_files/figure-markdown_strict/unnamed-chunk-6-1.png)<!-- -->
 
 *2. Which 5-minute interval, on average across all the days in the
 dataset, contains the maximum number of steps?*
@@ -104,7 +114,7 @@ dataset, contains the maximum number of steps?*
 ### Imputing missing values
 
 *1. Calculate and report the total number of missing values in the
-dataset (i.e. the total number of rows with 𝙽𝙰s)*
+dataset (i.e. the total number of rows with ð½ð°s)*
 
     missStepsData <- is.na(activeData)
     sum(missStepsData)
@@ -133,14 +143,10 @@ the missing data filled in*
 *4. Histogram, Mean and Median*
 
     totalStepsPerDay2 <- tapply(activeData2$steps, activeData2$date, sum, na.rm=TRUE)
-    head(totalStepsPerDay2)
-
-    ## 2012-10-01 2012-10-02 2012-10-03 2012-10-04 2012-10-05 2012-10-06 
-    ##   10766.19     126.00   11352.00   12116.00   13294.00   15420.00
-
+    #head(totalStepsPerDay2)
     hist(totalStepsPerDay2 , main= "histogram of the total number of steps taken each day", xlab="Total steps taken per day", ylab="Count", las=1,breaks=30, col="green", xlim=c(0,25000), ylim=c(0,20))
 
-![](pa1_template_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](pa1_template_files/figure-markdown_strict/unnamed-chunk-9-1.png)<!-- -->
 
     mean(totalStepsPerDay2)
 
@@ -156,8 +162,8 @@ the missing data filled in*
 
 ### Are there differences in activity patterns between weekdays and weekends?
 
-*1. Create a new factor variable in the dataset with two levels –
-“weekday” and “weekend”.*
+*1. Create a new factor variable in the dataset with two levels â
+âweekdayâ and âweekendâ.*
 
     activeData3<-activeData2
 
@@ -179,4 +185,4 @@ the missing data filled in*
 
     xyplot(steps ~ interval | daytype, aveSteps3, type = "l", layout = c(1,2), main = "Time Series Plot of the 5-Minute Interval\nand the Average Number of Steps Taken,\nAveraged Across All Weekday Days or Weekend Days", xlab = "5-Minute Interval", ylab = "Average Number of Steps Taken")
 
-![](pa1_template_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+![](pa1_template_files/figure-markdown_strict/unnamed-chunk-11-1.png)<!-- -->
